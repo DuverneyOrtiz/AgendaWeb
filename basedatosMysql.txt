@@ -1,0 +1,92 @@
+-- phpMyAdmin SQL Dump
+-- version 4.5.2
+-- http://www.phpmyadmin.net
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 21-01-2018 a las 00:33:28
+-- Versión del servidor: 5.7.9
+-- Versión de PHP: 5.6.16
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `eventos`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `evento`
+--
+
+DROP TABLE IF EXISTS `evento`;
+CREATE TABLE IF NOT EXISTS `evento` (
+  `id_evento` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(50) NOT NULL,
+  `F_Inicio` date NOT NULL,
+  `H_Inicio` time DEFAULT NULL,
+  `F_Final` date DEFAULT NULL,
+  `H_Final` time DEFAULT NULL,
+  `EventoCompleto` varchar(5) NOT NULL,
+  `id` int(11) NOT NULL,
+  PRIMARY KEY (`id_evento`),
+  KEY `Ref17` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `evento`
+--
+
+INSERT INTO `evento` (`id_evento`, `titulo`, `F_Inicio`, `H_Inicio`, `F_Final`, `H_Final`, `EventoCompleto`, `id`) VALUES
+(53, 'Evento uno', '2018-01-21', '06:30:00', '2018-01-23', '07:00:00', 'false', 1),
+(57, 'Evento tres', '2018-01-17', '07:00:00', '2018-01-19', '07:00:00', 'false', 1),
+(65, 'Evento Pedro1', '2018-01-08', '07:00:00', '2018-01-10', '07:00:00', 'false', 2),
+(66, 'Evento Pedro2', '2018-01-03', '00:00:00', NULL, NULL, 'true', 2),
+(67, 'Evento Pedro3', '2018-01-15', '05:00:00', '2018-01-18', '05:30:00', 'false', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+
+DROP TABLE IF EXISTS `usuario`;
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `correo` varchar(50) DEFAULT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `pw` text,
+  `F_Nacimiento` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `correo` (`correo`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `correo`, `nombre`, `pw`, `F_Nacimiento`) VALUES
+(1, 'diego@hotmail.com', 'Diego Sanchez', '$2y$10$9gADi6AfN5g8Yxv9LYSuWe3r3wwpa7PiaFWguy9ewFcZOL7MWpLLu', '2002-01-06'),
+(2, 'Pedro@hotmail.com', 'pedro Camargo', '$2y$10$2qP5Ub6XowbfpDs2pZmkcunfaKWq8srLV7MKjf93TuOjv0lgk74Zq', '2001-01-06'),
+(3, 'Sandra@hotmail.com', 'Sandra Lopez', '$2y$10$ghN2A4IZq7d5NIf6tsj4F.TsVMoZtZ9QNFQkaE8vrOsOKci8G3A6a', '2000-01-06');
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `evento`
+--
+ALTER TABLE `evento`
+  ADD CONSTRAINT `Refusuario7` FOREIGN KEY (`id`) REFERENCES `usuario` (`id`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
